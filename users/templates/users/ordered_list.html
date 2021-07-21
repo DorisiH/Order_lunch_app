@@ -1,0 +1,52 @@
+{% extends "food/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        
+        <div class="media-body">
+        </div>
+      </div>
+      <!-- FORM HERE -->
+    </div>
+    {% if user.is_superuser %}
+    <center>
+    <form method="POST">
+        {% csrf_token %}
+        
+    from : <input type="date" name="fromdate"/>
+    to: <input type="date" name="todate" />
+    <input type="submit" value="Search"/>
+    <hr>
+    <table border="1"> 
+        <tr>
+            <th>Employ name</th>
+            <th>ordered items</th>
+            <th>total price</th>
+            <th>date ordered</th>
+        </tr>
+        
+        {% for orderlist in searchresult %}
+            
+            
+            
+                <tr>
+                    <td>{{ orderlist.employee }}</td>
+                    <td>{{ orderlist.items }}</td>
+                    <td>{{ orderlist.price }}$</td>
+                    <td>{{ orderlist.date }}</td>
+                    
+                </tr>
+            
+        {% endfor %}
+    </table>
+    </form>
+    </center>
+    {% else %}
+    <h4> This page is only for admin users</h4>
+
+
+    {% endif %}
+ 
+   
+{% endblock content %}

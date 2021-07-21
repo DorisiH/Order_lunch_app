@@ -1,0 +1,95 @@
+{% extends 'food/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="container mb-5">
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-12 col-sm-12 p-4">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="pt-5">
+                    {% for app in soup %}
+                    <div class="row">
+                        
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ app.pk }}">
+                                    <label class="form-check-label">{{ app.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">${{ app.price }}</p>
+                            </div>
+                            <p>{{ app.description }}</p>
+                        </div>
+                    </div>
+                    <hr />
+                {% endfor %}
+                </div>
+
+                
+
+                <div class="pt-5">
+                    {% for dessert in dessert %}
+                    <div class="row mt-4">
+                        
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ dessert.pk }}">
+                                    <label class="form-check-label">{{ dessert.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">${{ dessert.price }}</p>
+                            </div>
+                            <p>{{ dessert.description }}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                </div>
+                <div class="pt-5">
+                    {% for tjeter in tjera %}
+                    <div class="row mt-4">
+                        
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ tjeter.pk }}">
+                                    <label class="form-check-label">{{ tjeter.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">${{ tjeter.price }}</p>
+                            </div>
+                            <p>{{ tjeter.description }}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                </div>
+
+                <div class="pt-5">
+                    {% for drinks in drink %}
+                    <div class="row mt-4">
+                        
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ drinks.pk }}">
+                                    <label class="form-check-label">{{ drinks.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">${{ drinks.price }}</p>
+                            </div>
+                            <p>{{ drinks.description }}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                </div>
+                <button class="btn btn-dark mt-5">Place Order!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <a class="nav-link" href="{% url 'login' %}">please login <span class="sr-only"></span></a>
+{% endif %}
+{% endblock content %}
